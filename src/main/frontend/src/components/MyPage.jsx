@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { Link } from 'react-router-dom';
 
 const MyPage = () => {
   const { user, logout, login } = useAuth();
@@ -77,6 +78,9 @@ const MyPage = () => {
   return (
     <div style={{ minHeight: '100vh', background: '#111', padding: '140px 0 80px 0', boxSizing: 'border-box' }}>
       <div style={{ maxWidth: 540, margin: '0 auto', padding: 48, background: 'rgba(30,30,30,0.96)', borderRadius: 32, boxShadow: '0 12px 40px rgba(0,0,0,0.32)', backdropFilter: 'blur(2px)', border: '2px solid rgba(255,255,255,0.10)', boxSizing: 'border-box', position: 'relative' }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 12 }}>
+          <Link to="/mypage/requests" style={{ color: '#ff6a00', fontWeight: 700, textDecoration: 'underline', fontSize: '1.08rem' }}>내 요청 내역</Link>
+        </div>
         {(error || success) && (
           <div style={{
             position: 'absolute', left: 0, right: 0, top: -60, margin: 'auto', width: '90%',
