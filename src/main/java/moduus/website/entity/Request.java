@@ -17,6 +17,9 @@ public class Request {
     private String description;
 
     @Column(nullable = false)
+    private String plan;
+
+    @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(nullable = false)
@@ -24,9 +27,10 @@ public class Request {
 
     public Request() {}
 
-    public Request(String userEmail, String description) {
+    public Request(String userEmail, String description, String plan) {
         this.userEmail = userEmail;
         this.description = description;
+        this.plan = plan;
         this.createdAt = LocalDateTime.now();
         this.status = "대기";
     }
@@ -36,6 +40,8 @@ public class Request {
     public void setUserEmail(String userEmail) { this.userEmail = userEmail; }
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
+    public String getPlan() { return plan; }
+    public void setPlan(String plan) { this.plan = plan; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     public String getStatus() { return status; }

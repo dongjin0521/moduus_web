@@ -25,15 +25,17 @@ public class RequestController {
     public ResponseEntity<?> createRequest(@RequestBody Map<String, String> req) {
         String userEmail = req.get("userEmail");
         String description = req.get("description");
-        if (userEmail == null || description == null) {
-            return ResponseEntity.badRequest().body("userEmail, description 필수");
+        String plan = req.get("plan");
+        if (userEmail == null || description == null || plan == null) {
+            return ResponseEntity.badRequest().body("userEmail, description, plan 필수");
         }
-        Request request = new Request(userEmail, description);
+        Request request = new Request(userEmail, description, plan);
         requestRepository.save(request);
         Map<String, Object> result = new HashMap<>();
         result.put("id", request.getId());
         result.put("userEmail", request.getUserEmail());
         result.put("description", request.getDescription());
+        result.put("plan", request.getPlan());
         result.put("createdAt", request.getCreatedAt());
         result.put("status", request.getStatus());
         return ResponseEntity.ok(result);
