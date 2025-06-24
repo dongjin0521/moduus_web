@@ -18,6 +18,7 @@ import RequestPage from './components/RequestPage';
 import SignUpPage from './components/SignUpPage';
 import LoginPage from './components/LoginPage';
 import MyPage from './components/MyPage';
+import MyRequestsPage from './components/MyRequestsPage';
 import './App.css';
 
 function ScrollToSectionOnNavigate() {
@@ -142,6 +143,7 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/mypage/requests" element={<MyRequestsPage />} />
         </Routes>
       </div>
     </Router>

@@ -17,7 +17,16 @@ const MyRequestsPage = () => {
       .finally(() => setLoading(false));
   }, [user]);
 
-  if (!user) return null;
+  if (!user) {
+    return (
+      <div style={{ minHeight: '100vh', background: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ maxWidth: 480, margin: '0 auto', padding: 36, background: 'rgba(30,30,30,0.92)', borderRadius: 24, boxShadow: '0 8px 32px rgba(0,0,0,0.25)', textAlign: 'center' }}>
+          <h2 style={{ color: '#fff', marginBottom: 24 }}>로그인 후 이용해 주세요</h2>
+          <p style={{ color: '#bbb', marginBottom: 32 }}>내 요청 내역은 회원만 확인할 수 있습니다.<br/>로그인 또는 회원가입 후 이용해 주세요.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ minHeight: '100vh', background: '#111', padding: '140px 0 80px 0', boxSizing: 'border-box' }}>
