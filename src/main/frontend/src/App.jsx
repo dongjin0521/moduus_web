@@ -19,6 +19,7 @@ import SignUpPage from './components/SignUpPage';
 import LoginPage from './components/LoginPage';
 import MyPage from './components/MyPage';
 import MyRequestsPage from './components/MyRequestsPage';
+import PortfolioPage from './components/PortfolioPage';
 import './App.css';
 
 function ScrollToSectionOnNavigate() {
@@ -55,6 +56,7 @@ function App() {
             <li><Link to="/" state={{ scrollTo: 'about' }}>ABOUT</Link></li>
             <li><Link to="/" state={{ scrollTo: 'contact' }}>CONTACT</Link></li>
             <li><Link to="/request">제작 요청</Link></li>
+            <li><Link to="/portfolio">PORTFOLIO</Link></li>
             {user ? (
               <li><Link to="/mypage">마이페이지</Link></li>
             ) : (
@@ -144,6 +146,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/mypage/requests" element={<MyRequestsPage />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
         </Routes>
       </div>
     </Router>

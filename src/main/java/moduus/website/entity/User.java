@@ -22,17 +22,21 @@ public class User {
     @Column(nullable = false)
     private String phone;
 
+    @Column(nullable = false, name = "admin_yn", length = 1)
+    private String adminYn = "N";
+
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
     // Getters, setters, 생성자 등 생략 (롬복 사용 가능)
     public User() {}
 
-    public User(String email, String password, String nickname, String phone) {
+    public User(String email, String password, String nickname, String phone, String adminYn) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
         this.phone = phone;
+        this.adminYn = adminYn;
         this.createdAt = LocalDateTime.now();
     }
 
@@ -48,4 +52,6 @@ public class User {
     public void setPhone(String phone) { this.phone = phone; }
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+    public String getAdminYn() { return adminYn; }
+    public void setAdminYn(String adminYn) { this.adminYn = adminYn; }
 } 

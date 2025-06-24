@@ -22,7 +22,7 @@ public class UserService {
             throw new IllegalArgumentException("이미 사용 중인 이메일입니다.");
         }
         String encodedPassword = passwordEncoder.encode(password);
-        User user = new User(email, encodedPassword, nickname, phone);
+        User user = new User(email, encodedPassword, nickname, phone, "N");
         return userRepository.save(user);
     }
 
