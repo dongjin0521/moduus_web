@@ -12,6 +12,12 @@ body,
   scroll-behavior: smooth;
 }
 
+/* 모바일 랜딩페이지용 스크롤 허용 */
+.mobile-landing-container {
+  overflow: auto !important;
+  height: 100vh;
+}
+
 /* 스크롤 영역을 감싸는 컨테이너 */
 .app-container {
   width: 100%;

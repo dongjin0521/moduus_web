@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
 import image1 from './components/Elements/1.png';
@@ -15,6 +15,7 @@ import image11 from './components/Elements/11.png';
 import image12 from './components/Elements/12.png';
 import image13 from './components/Elements/13.png';
 import backgroundImg from './components/Elements/background.png';
+import mobileImg from './components/Elements/mobile.png';
 import RequestPage from './components/RequestPage';
 import SignUpPage from './components/SignUpPage';
 import LoginPage from './components/LoginPage';
@@ -45,8 +46,75 @@ function ScrollToSectionOnNavigate() {
   return null;
 }
 
+// 모바일 감지 훅
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isMobileDevice = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+      const isSmallScreen = window.innerWidth <= 768;
+      setIsMobile(isMobileDevice || isSmallScreen);
+    };
+
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
+  return isMobile;
+}
+
+// 모바일 랜딩페이지 컴포넌트
+function MobileLandingPage() {
+  return (
+    <div style={{
+      width: '100%',
+      height: 'auto'
+    }}>
+      <img 
+        src={mobileImg} 
+        alt="Mobile Landing Page" 
+        style={{
+          width: '100%',
+          height: 'auto',
+          display: 'block'
+        }}
+      />
+    </div>
+  );
+}
+
 function App() {
   const { user } = useAuth();
+  const isMobile = useIsMobile();
+  const [showMobileLanding, setShowMobileLanding] = useState(false);
+
+  useEffect(() => {
+    if (isMobile && window.location.pathname === '/') {
+      setShowMobileLanding(true);
+    }
+  }, [isMobile]);
+
+  if (showMobileLanding) {
+    return (
+      <Router>
+        <div className="mobile-landing-container">
+          <MobileLandingPage />
+        </div>
+        <Routes>
+          <Route path="/request" element={<RequestPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/mypage/requests" element={<MyRequestsPage />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
+        </Routes>
+      </Router>
+    );
+  }
+
   return (
     <Router>
       <ScrollToSectionOnNavigate />
