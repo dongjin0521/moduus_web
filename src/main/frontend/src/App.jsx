@@ -14,12 +14,14 @@ import image10 from './components/Elements/10.png';
 import image11 from './components/Elements/11.png';
 import image12 from './components/Elements/12.png';
 import image13 from './components/Elements/13.png';
+import backgroundImg from './components/Elements/background.png';
 import RequestPage from './components/RequestPage';
 import SignUpPage from './components/SignUpPage';
 import LoginPage from './components/LoginPage';
 import MyPage from './components/MyPage';
 import MyRequestsPage from './components/MyRequestsPage';
 import PortfolioPage from './components/PortfolioPage';
+import { FaEnvelope, FaPhone } from 'react-icons/fa';
 import './App.css';
 
 function ScrollToSectionOnNavigate() {
@@ -55,12 +57,9 @@ function App() {
             <li><Link to="/" state={{ scrollTo: 'home' }}>HOME</Link></li>
             <li><Link to="/" state={{ scrollTo: 'about' }}>ABOUT</Link></li>
             <li><Link to="/" state={{ scrollTo: 'contact' }}>CONTACT</Link></li>
-            <li><Link to="/request">제작 요청</Link></li>
             <li><Link to="/portfolio">PORTFOLIO</Link></li>
-            {user ? (
+            {user && (
               <li><Link to="/mypage">마이페이지</Link></li>
-            ) : (
-              <li><Link to="/login">로그인</Link></li>
             )}
           </ul>
         </nav>
@@ -103,41 +102,62 @@ function App() {
               <section className="section snap-start">
                 <img src={image12} alt="Section 12" className="section-image" />
               </section>
-              <section className="section snap-start" style={{ position: 'relative' }}>
-                <img src={image13} alt="Section 13" className="section-image" />
-                <Link to="/request" style={{
-                  position: 'absolute',
-                  bottom: '60px',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
-                  padding: '28px 80px',
-                  background: 'linear-gradient(90deg, #ff6a00 0%, #ee0979 100%)',
+              <section className="section snap-start" style={{
+                position: 'relative',
+                background: `url(${backgroundImg}) center/cover no-repeat`,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                minHeight: '100vh',
+              }}>
+                <div style={{
+                  background: 'rgba(0,0,0,0.54)',
+                  borderRadius: 32,
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.22)',
+                  padding: '64px 48px',
+                  textAlign: 'center',
                   color: '#fff',
-                  borderRadius: '48px',
-                  fontSize: '2.2rem',
-                  fontWeight: 700,
-                  letterSpacing: '2px',
-                  textDecoration: 'none',
-                  boxShadow: '0 8px 32px rgba(238,9,121,0.25), 0 2px 8px rgba(0,0,0,0.10)',
-                  border: 'none',
-                  transition: 'all 0.2s cubic-bezier(.4,2,.6,1)',
-                  cursor: 'pointer',
-                  zIndex: 10,
-                  textShadow: '0 2px 8px rgba(0,0,0,0.15)'
-                }}
-                onMouseOver={e => {
-                  e.target.style.background = 'linear-gradient(90deg, #ee0979 0%, #ff6a00 100%)';
-                  e.target.style.transform = 'translateX(-50%) scale(1.06)';
-                  e.target.style.boxShadow = '0 12px 40px rgba(238,9,121,0.35), 0 4px 16px rgba(0,0,0,0.15)';
-                }}
-                onMouseOut={e => {
-                  e.target.style.background = 'linear-gradient(90deg, #ff6a00 0%, #ee0979 100%)';
-                  e.target.style.transform = 'translateX(-50%) scale(1)';
-                  e.target.style.boxShadow = '0 8px 32px rgba(238,9,121,0.25), 0 2px 8px rgba(0,0,0,0.10)';
-                }}
-                >
-                  제작 요청하기
-                </Link>
+                  maxWidth: 420,
+                  width: '100%',
+                  backdropFilter: 'blur(2px)',
+                  border: '2px solid rgba(255,255,255,0.10)',
+                  zIndex: 2,
+                  animation: 'fadeInUp 0.8s cubic-bezier(.4,2,.6,1)',
+                  position: 'relative'
+                }}>
+                  <h2 style={{ fontSize: '2.3rem', fontWeight: 800, marginBottom: 36, letterSpacing: '2px', textShadow: '0 2px 12px rgba(0,0,0,0.18)' }}>Contact Us</h2>
+                  <div style={{ fontSize: '1.18rem', fontWeight: 700, marginBottom: 18, letterSpacing: '1px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+                    <FaEnvelope style={{ color: '#00c6fb', fontSize: 20, marginRight: 4 }} /> E-mail
+                  </div>
+                  <a href="mailto:moduusai@gmail.com" style={{
+                    color: '#00c6fb',
+                    fontSize: '1.18rem',
+                    fontWeight: 700,
+                    textDecoration: 'underline',
+                    wordBreak: 'break-all',
+                    transition: 'color 0.18s',
+                    marginBottom: 28,
+                    display: 'inline-block',
+                    letterSpacing: '0.5px'
+                  }}
+                    onMouseOver={e => e.target.style.color = '#ff6a00'}
+                    onMouseOut={e => e.target.style.color = '#00c6fb'}
+                  >moduusai@gmail.com</a>
+                  <div style={{ fontSize: '1.18rem', fontWeight: 700, margin: '36px 0 18px 0', letterSpacing: '1px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+                    <FaPhone style={{ color: '#ffb300', fontSize: 20, marginRight: 4 }} /> Phone
+                  </div>
+                  <a href="tel:+821046122896" style={{
+                    color: '#ffb300',
+                    fontSize: '1.18rem',
+                    fontWeight: 700,
+                    textDecoration: 'underline',
+                    transition: 'color 0.18s',
+                    letterSpacing: '0.5px'
+                  }}
+                    onMouseOver={e => e.target.style.color = '#ee0979'}
+                    onMouseOut={e => e.target.style.color = '#ffb300'}
+                  >(+82)10-4612-2896</a>
+                </div>
               </section>
             </div>
           } />

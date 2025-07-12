@@ -165,3 +165,18 @@ section {
     font-size: 1.1rem;
   }
 }
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fadeInUp {
+  animation: fadeInUp 0.8s cubic-bezier(.4,2,.6,1);
+}
